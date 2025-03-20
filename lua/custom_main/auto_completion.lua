@@ -75,7 +75,7 @@ return { -- Autocompletion
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
           --['<CR>'] = cmp.mapping.confirm { select = true },
-          --['<Tab>'] = cmp.mapping.select_next_item()
+          --['<Tab>'] = cmp.mapping.select_next_item(),
           --['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.
@@ -96,6 +96,7 @@ return { -- Autocompletion
               luasnip.expand_or_jump()
             end
           end, { 'i', 's' }),
+          -- that is the 's' for? TODO:
           ['<C-h>'] = cmp.mapping(function()
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)

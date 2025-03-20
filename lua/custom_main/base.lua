@@ -9,8 +9,8 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 --TODOM: Add the correct file path
--- vim.opt.undofile = true
--- vim.opt.undodir = os.getenv 'HOME' .. '/'
+vim.opt.undofile = true
+vim.opt.undodir = os.getenv 'HOME' .. '/.local/state/nvim/undo'
 
 --NOTE: not sure we need to add this. Have to see in the future
 -- Set the script encoding
