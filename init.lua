@@ -86,6 +86,7 @@ require('lazy').setup({
   -- ColorScheme all
   require 'custom_main.color_scheme_file.all', -- ColorScheme all for download
   require 'custom_main.color_scheme_file.color_tokyonight', -- Color Scheme that is setup
+  -- require 'custom_main.colorizer_file', -- Add color in hash for and rgb and other formats
   -- { 'tribela/vim-transparent' }, -- Transparency
 
   -- Highlight todo, notes, etc in comments
@@ -112,6 +113,9 @@ require('lazy').setup({
   -- TODOM: need to set up a good floating terminal
   -- This creates a floating terminal
   -- require 'custom.plugins.floaterm_file', -- floa_term block
+
+  -- This is similar to autopairs. I will try this to see if its lighter
+  require 'custom_main.mini_pairs',
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
