@@ -23,6 +23,9 @@
 require 'custom_main.base'
 local keymap_file = require 'custom_main.keymaps_general' -- This is for General Keymaps (loads keymaps that in file and not in function)
 
+-- Testing is this is working properly
+require 'custom_main.tj_floatterm'
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -102,19 +105,19 @@ require('lazy').setup({
   require 'custom_main.auto_session_save', -- auto_sessions block
 
   -- This setup allows for images to viewed. Its can be configured to have it in nvim-tree 
-  -- {
-  --   'adelarsq/image_preview.nvim',
-  --   event = 'VeryLazy',
-  --   config = function()
-  --     require("image_preview").setup({})
-  --   end
-  -- },
+  {
+    'adelarsq/image_preview.nvim',
+    event = 'VeryLazy',
+    config = function()
+      require("image_preview").setup()
+    end
+  },
   -- NvimTree setup
   { -- Nvim tree taking from file
     "nvim-tree/nvim-tree.lua",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      -- "adelarsq/image_preview"
+      "adelarsq/image_preview.nvim"
     },
     config = function()
       require("custom_main.nvim_tree_file")
