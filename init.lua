@@ -2,7 +2,8 @@
   If you don't know anything about Lua, a guide 10-15 minutes:
   - https://learnxinyminutes.com/docs/lua/
 
-  After understanding a bit more about Lua, you can use :help lua-guide as a reference for how Neovim integrates Lua.
+  After understanding a bit more about Lua, you can use :help lua-guide as a reference for how
+  Neovim integrates Lua.
     - :help lua-guide
     - (or HTML version): https://neovim.io/doc/user/lua-guide.html
 
@@ -21,11 +22,12 @@
 -- See `:help mapleader`
 -- NOTE: From here Manish, has added this changes
 require 'custom_main.base'
-local keymap_file = require 'custom_main.keymaps_general' -- This is for General Keymaps (loads keymaps that in file and not in function)
+-- This is for General Keymaps (loads keymaps that in file and not in function)
+local keymap_file = require 'custom_main.keymaps_general'
 
 -- Testing is this is working properly
 require 'custom_main.tj_floatterm'
--- starthere :TODOM: have to see online file perhaps. this looks like a good one. also have to have something 
+-- :TODOM: have to see online file perhaps. this looks like a good one. also have to have something
 -- that allows me to fold files
 
 -- [[ Basic Autocommands ]]
@@ -34,7 +36,8 @@ require 'custom_main.tj_floatterm'
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
-require 'custom_main.lazy_additionals' -- this will help load some highlighting and setup lazy package manager
+--  this will help load highlighting and setup lazy package manager
+require 'custom_main.lazy_additionals'
 
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
@@ -45,11 +48,15 @@ require('lazy').setup({
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
   --
-  -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
+  -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function,
+  -- forcing the plugin to be loaded.
   -- NOTE: loaded from keymaps
   { config = keymap_file.Mymethod() }, -- Here config is a callback function
 
   require 'custom_main.gitstuff_file', -- gitsigns block
+
+  -- this create a vertical line so that we can stay without the limit of code text characters
+  require 'custom_main.virt_column',
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
@@ -76,11 +83,12 @@ require('lazy').setup({
   -- you do for a plugin at the top level, you can do for a dependency.
   --
   -- Use the `dependencies` key to specify the dependencies of a particular plugin
-  -- TODO: Some dependencies can work with telescope. Check how you can add them. Dont know as of now what have to be done.
+  -- TODO: Some dependencies can work with telescope. Check how you can add them.
+  -- Dont know as of now what have to be done.
   require 'custom_main.telescope_file', -- telescope block
 
   -- All LSP stuff here. Important file
-  require 'custom_main.lsp_file', -- All Lsp configs 
+  require 'custom_main.lsp_file', -- All Lsp configs
 
   -- Autoformat
   require 'custom_main.auto_format', -- autoformat block
@@ -89,16 +97,16 @@ require('lazy').setup({
   require 'custom_main.auto_completion', -- auto completion block
 
   -- ColorScheme all
-  require 'custom_main.color_scheme_file.all', -- ColorScheme all for download
+  require 'custom_main.color_scheme_file.all',              -- ColorScheme all for download
   require 'custom_main.color_scheme_file.color_tokyonight', -- Color Scheme that is setup
-  require 'custom_main.colorizer_file', -- Add color in hash for and rgb and other formats
+  require 'custom_main.colorizer_file',                     -- Add color in hash for and rgb and other formats
   -- { 'tribela/vim-transparent' }, -- Transparency
 
   -- Highlight todo, notes, etc in comments
-  require 'custom_main.todo_comment', -- todocomment block 
+  require 'custom_main.todo_comment', -- todocomment block
 
   -- Collection of various small independent plugins/modules
-  require 'custom_main.mini_dependencies', -- mini dependencies block 
+  require 'custom_main.mini_dependencies', -- mini dependencies block
 
   -- Treesitter. Highlight, edit, and navigate code
   require 'custom_main.treesitter_file', -- treesitter block
@@ -139,8 +147,8 @@ require('lazy').setup({
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- added from custom_main
 
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    This is the easiest way to modularize your config.
+  -- NOTE: The import below can automatically add your own plugins, configuration, etc from
+  -- `lua/custom/plugins/*.lua`. This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   -- { import = 'custom.plugins' },

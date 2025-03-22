@@ -44,6 +44,8 @@ local toggle_terminal = function()
   -- Prevents invalid window access:-
   if not vim.api.nvim_win_is_valid(state.floating.win) then
     state.floating = create_floating_window { buf = state.floating.buf }
+
+    -- Open the terminal inside the floating window   
     if vim.bo[state.floating.buf].buftype ~= "terminal" then
       vim.cmd.terminal()
       -- vim.fn.jobwait({vim.b.terminal_job_id}, 500) -- Wait up to 500ms for job to start
@@ -53,7 +55,6 @@ local toggle_terminal = function()
   end
   vim.cmd('normal i')
 end
-
 
 local function set_terminal_keymaps(bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<esc><esc>", [[<C-\><C-n>:q!<CR>]], { noremap = true, silent = true })

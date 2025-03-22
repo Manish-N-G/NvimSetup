@@ -16,7 +16,10 @@ return {
         markdown = { enabled = true },
         neorg = { enabled = true },
       },
-      -- hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" }, -- render image files as images when opened
+      -- Enable for terminal buffers
+      terminal = { enabled = true },   -- 👈 **This enables rendering in terminal**
+      -- render image files as images when opened
+      hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" },
     })
   end
 }
