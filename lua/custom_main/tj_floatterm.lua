@@ -1,6 +1,3 @@
--- vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
-vim.keymap.set("t", "<esc><esc>", [[<C-\><C-n>:q!<CR>]], { noremap = true, silent = true })
-
 local state = {
   floating = {
     buf = -1,
@@ -57,7 +54,26 @@ local toggle_terminal = function()
   vim.cmd('normal i')
 end
 
+
+local function set_terminal_keymaps(bufnr)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<esc><esc>", [[<C-\><C-n>:q!<CR>]], { noremap = true, silent = true })
+end
+
+vim.api.nvim_create_autocmd("TermOpen", {
+-- Hook into terminal buffer creation
+  pattern = "*",
+  callback = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    set_terminal_keymaps(bufnr)
+  end,
+})
+
 -- Example usage:
 -- Create a floating window with default dimensions
 vim.api.nvim_create_user_command("Floaterminal", toggle_terminal, {})
 vim.keymap.set({'n','t'}, '<C-/>', toggle_terminal)
+
+-- vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
+vim.keymap.set("t", "<esc><esc>", [[<C-\><C-n>:q!<CR>]], { noremap = true, silent = true })
+-- vim.keymap.set("n", "<esc><esc>", [[<C-\><C-n>:q!<CR>]], { noremap = true, silent = true })
+vim.keymap.set("t", "<C-q>", [[<C-\><C-n>]], { noremap = true, silent = true })
