@@ -3,7 +3,7 @@ return {
   {
     'norcalli/nvim-colorizer.lua',
     -- can you hipatters also, installed as lazy extra
-    enabled = false,
+    enabled = true,
     config = function()
       require('colorizer').setup()
     end,

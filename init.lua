@@ -25,6 +25,8 @@ local keymap_file = require 'custom_main.keymaps_general' -- This is for General
 
 -- Testing is this is working properly
 require 'custom_main.tj_floatterm'
+-- starthere :TODOM: have to see online file perhaps. this looks like a good one. also have to have something 
+-- that allows me to fold files
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -89,7 +91,7 @@ require('lazy').setup({
   -- ColorScheme all
   require 'custom_main.color_scheme_file.all', -- ColorScheme all for download
   require 'custom_main.color_scheme_file.color_tokyonight', -- Color Scheme that is setup
-  -- require 'custom_main.colorizer_file', -- Add color in hash for and rgb and other formats
+  require 'custom_main.colorizer_file', -- Add color in hash for and rgb and other formats
   -- { 'tribela/vim-transparent' }, -- Transparency
 
   -- Highlight todo, notes, etc in comments
