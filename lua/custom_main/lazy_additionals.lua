@@ -28,3 +28,25 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
+
+-- Check if hererocks is installed, if not, install it.
+-- local function install_hererocks()
+--   local hererocks_path = vim.fn.expand("~/.local/share/nvim/lazy-rocks/hererocks")
+--
+--   -- Check if hererocks is already installed.
+--   if vim.fn.isdirectory(hererocks_path) == 0 then
+--     print("Installing hererocks...")
+--     vim.fn.system({
+--       "git", "clone", "https://github.com/hoelzro/hererocks.git", hererocks_path
+--     })
+--
+--     if vim.v.shell_error ~= 0 then
+--       print("Failed to install hererocks.")
+--     else
+--       print("Successfully installed hererocks.")
+--     end
+--   end
+-- end
+--
+-- -- Install if needed
+-- install_hererocks()

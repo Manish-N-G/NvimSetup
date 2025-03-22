@@ -120,10 +120,6 @@ require('lazy').setup({
     end
   },
 
-  -- TODOM: need to set up a good floating terminal
-  -- This creates a floating terminal
-  -- require 'custom.plugins.floaterm_file', -- floa_term block
-
   -- This is similar to autopairs. I will try this to see if its lighter
   require 'custom_main.mini_pairs',
 
