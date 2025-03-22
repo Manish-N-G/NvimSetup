@@ -51,15 +51,6 @@ local function my_on_attach(bufnr)
   vim.keymap.set('n', '<tab>l',  ':wincmd l<CR>:tabnext<CR>',         opts('tab change next'))
   vim.keymap.set('n', '<tab>h',  ':wincmd h<CR>:tabprev<CR>',         opts('tab change prev'))
 
-  -- Image preview mapping
-  -- vim.keymap.set('n', '<leader>p', function()
-  --   local node = api.tree.get_node_under_cursor()
-  --   if node and node.type == "file" then
-  --     -- require("image_preview").PreviewImage(node.absolute_path)
-  --     -- vim.cmd("silent !yazi --preview " .. node.absolute_path)
-  --   end
-  -- end, opts('Preview Image'))
-
 end
 
 --TODOM: I need to see how to remove the stars on nvim tree. this perhaps doesnt look good?

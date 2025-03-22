@@ -106,20 +106,14 @@ require('lazy').setup({
   -- This can activate auto sessions save and restore for the editor
   require 'custom_main.auto_session_save', -- auto_sessions block
 
-  -- This setup allows for images to viewed. Its can be configured to have it in nvim-tree 
-  {
-    'adelarsq/image_preview.nvim',
-    event = 'VeryLazy',
-    config = function()
-      require("image_preview").setup()
-    end
-  },
+  -- This plugin allows us to see images in the buffer
+  require 'custom_main.3rd_image',
+
   -- NvimTree setup
   { -- Nvim tree taking from file
     "nvim-tree/nvim-tree.lua",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      "adelarsq/image_preview.nvim"
     },
     config = function()
       require("custom_main.nvim_tree_file")
