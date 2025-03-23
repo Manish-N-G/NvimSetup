@@ -37,8 +37,9 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
     -- to preview hunk shortcut 
     vim.keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk_inline<CR>", { noremap = true, silent = true, desc = "[G]it [P]review" }),
     vim.keymap.set("n", "<leader>gs", ":Gitsigns stage_hunk<CR>", { noremap = true, silent = true, desc = "[G]it [S]tage hunk" }),
-    vim.keymap.set("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true, desc = "[G]it [R]" }),
-    vim.keymap.set("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true, desc = "[G]it [P]review" }),
+    vim.keymap.set("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true, desc = "[G]it [R]eset hunk" }),
+    vim.keymap.set("n", "<leader>gi", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true, desc = "[G]it hunk previous" }),
+    vim.keymap.set("n", "<leader>go", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true, desc = "[G]it hunk next" }),
   },
   -- This is diffview, for visual effects for gitdiff
   {
@@ -200,9 +201,19 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
         end
       end
 
+      -- Function to toggle Diffviewhistory
+      local function toggle_diffviewhistory()
+        local view = require("diffview.lib").get_current_view()
+        if view then
+          vim.cmd("DiffviewClose")
+        else
+          vim.cmd("DiffviewFileHistory")
+        end
+      end
+
       -- Keybinding for toggling Diffview
       vim.keymap.set("n", "<leader>gv", toggle_diffview, { noremap = true, silent = true, desc = "Toggle Git Diff[V]iew" })
-      vim.keymap.set("n", "<leader>gh", ":DiffviewFileHistory<CR>", { noremap = true, silent = true, desc = "Open Git [H]" })
+      vim.keymap.set("n", "<leader>gh", toggle_diffviewhistory, { noremap = true, silent = true, desc = "Toggle Git File[H]istory" })
 
     end,
   },
