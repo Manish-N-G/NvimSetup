@@ -34,6 +34,11 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
         vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = '#D35954' }) -- Red for deletions
       end,
     },
+    -- to preview hunk shortcut 
+    vim.keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk_inline<CR>", { noremap = true, silent = true, desc = "[G]it [P]review" }),
+    vim.keymap.set("n", "<leader>gs", ":Gitsigns stage_hunk<CR>", { noremap = true, silent = true, desc = "[G]it [S]tage hunk" }),
+    vim.keymap.set("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true, desc = "[G]it [R]" }),
+    vim.keymap.set("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true, desc = "[G]it [P]review" }),
   },
   -- This is diffview, for visual effects for gitdiff
   {
@@ -43,7 +48,7 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
       local actions = require("diffview.actions") -- Load actions inside config
 
       require("diffview").setup({
-        diff_binaries = false,    -- Show diffs for binariesdiff_binaries = false,    -- Show diffs for binariesdiff_binaries = false,    -- Show diffs for binaries
+        diff_binaries = false,    -- Show diffs for binariesdiff_binaries = false, 
         use_icons = true, -- Set to false if you want to disable icons
         enhanced_diff_hl = true, -- See |diffview-config-enhanced_diff_hl|
         show_help_hints = true,   -- Show hints for how to open the help panel
@@ -114,13 +119,16 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
             { "n", "o",              actions.select_entry,                   { desc = "Open the diff for the selected entry" } },
             { "n", "<2-LeftMouse>",  actions.select_entry,                   { desc = "Open the diff for the selected entry" } },
             { "n", "-",              actions.toggle_stage_entry,             { desc = "Stage / unstage the selected entry" } },
-            { "n", "S",              actions.stage_all,                      { desc = "Stage all entries" } },
-            { "n", "U",              actions.unstage_all,                    { desc = "Unstage all entries" } },
-            -- { "n", "L",              actions.open_commit_log,                { desc = "Open the commit log panel" } },
+            { "n", "ss",             actions.toggle_stage_entry,             { desc = "stage selected file/ unstage" } },
+            { "n", "SS",             actions.stage_all,                      { desc = "Stage all entries" } },
+            { "n", "UU",             actions.unstage_all,                    { desc = "Unstage all entries" } },
+            { "n", "L",              actions.open_commit_log,                { desc = "Open the commit log panel" } },
             { "n", "<c-b>",          actions.scroll_view(-0.25),             { desc = "Scroll the view up" } },
             { "n", "<c-f>",          actions.scroll_view(0.25),              { desc = "Scroll the view down" } },
-            { "n", "<tab><tab>",        actions.select_next_entry,              { desc = "Open the diff for the next file" } }, { "n", "<s-tab>",        actions.select_prev_entry,              { desc = "Open the diff for the previous file" } },
-            { "n", "<s-tab><s-tab>",    actions.select_prev_entry,              { desc = "Open the diff for the next file" } }, { "n", "<s-tab>",        actions.select_prev_entry,              { desc = "Open the diff for the previous file" } },
+            { "n", "<tab><tab>",        actions.select_next_entry,              { desc = "Open the diff for the next file" } },
+            -- { "n", "<tab>",        actions.select_next_entry,              { desc = "Open the diff for the next file" } },
+            { "n", "<s-tab><s-tab>",    actions.select_prev_entry,              { desc = "Open the diff for the next file" } },
+            -- { "n", "<s-tab>",        actions.select_prev_entry,              { desc = "Open the diff for the previous file" } },
             { "n", "i",              actions.listing_style,                  { desc = "Toggle between 'list' and 'tree' views" } },
             { "n", "R",              actions.refresh_files,                  { desc = "Update stats and entries in the file list" } },
             { "n", "<leader>e",      actions.toggle_files,                   { desc = "Toggle the file panel" } },
@@ -134,7 +142,8 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
             -- { "n", "<leader>cA",     actions.conflict_choose_all("all"),     { desc = "Choose all the versions of a conflict for the whole file" } },
             -- { "n", "dX",             actions.conflict_choose_all("none"),    { desc = "Delete the conflict region for the whole file" } },
           },
-          file_history_panel = { -- This is for getting like ref logs
+-- This is for getting like ref logs :todom: 
+          file_history_panel = {
             -- This one is inside list for reglog type data, not in buffer
             { "n", "g!",            actions.options,                     { desc = "Open the option panel" } },
             { "n", "<C-A-d>",       actions.open_in_diffview,            { desc = "Open the entry under the cursor in a diffview" } },
@@ -179,9 +188,22 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
             { "n", "<esc>", actions.close,  { desc = "Close help menu" } },
           },
         },
-
-
       })
+
+      -- Function to toggle Diffview
+      local function toggle_diffview()
+        local view = require("diffview.lib").get_current_view()
+        if view then
+          vim.cmd("DiffviewClose")
+        else
+          vim.cmd("DiffviewOpen")
+        end
+      end
+
+      -- Keybinding for toggling Diffview
+      vim.keymap.set("n", "<leader>gv", toggle_diffview, { noremap = true, silent = true, desc = "Toggle Git Diff[V]iew" })
+      vim.keymap.set("n", "<leader>gh", ":DiffviewFileHistory<CR>", { noremap = true, silent = true, desc = "Open Git [H]" })
+
     end,
   },
 }

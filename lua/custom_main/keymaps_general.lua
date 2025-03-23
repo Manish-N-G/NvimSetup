@@ -33,6 +33,7 @@ keymap.set('n', 'te', ':tabedit<CR>', opts)
 keymap.set('n', 'tx', ':tabclose<CR>', opts)
 keymap.set('n', '<tab>l', ':tabnext<CR>', opts)
 keymap.set('n', '<tab>h', ':tabprev<CR>', opts)
+
 -- Split window
 keymap.set('n', 'ss', ':split<CR><C-w>w', opts)
 keymap.set('n', 'sv', ':vsplit<CR><C-w>w', opts)
