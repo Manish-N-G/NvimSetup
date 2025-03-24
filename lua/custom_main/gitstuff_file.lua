@@ -35,11 +35,12 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
       end,
     },
     -- to preview hunk shortcut 
-    vim.keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk_inline<CR>", { noremap = true, silent = true, desc = "[G]it [P]review" }),
+    vim.keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", { noremap = true, silent = true, desc = "[G]it [P]review" }),
+    vim.keymap.set("n", "<leader>gl", ":Gitsigns preview_hunk_inline<CR>", { noremap = true, silent = true, desc = "[G]it [P]review" }),
     vim.keymap.set("n", "<leader>gs", ":Gitsigns stage_hunk<CR>", { noremap = true, silent = true, desc = "[G]it [S]tage hunk" }),
     vim.keymap.set("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true, desc = "[G]it [R]eset hunk" }),
-    vim.keymap.set("n", "<leader>gi", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true, desc = "[G]it hunk previous" }),
-    vim.keymap.set("n", "<leader>go", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true, desc = "[G]it hunk next" }),
+    vim.keymap.set("n", "<leader>gi", ":Gitsigns prev_hunk<CR>", { noremap = true, silent = true, desc = "[G]it hunk previous" }),
+    vim.keymap.set("n", "<leader>go", ":Gitsigns next_hunk<CR>", { noremap = true, silent = true, desc = "[G]it hunk next" }),
   },
   -- This is diffview, for visual effects for gitdiff
   {
@@ -47,6 +48,26 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local actions = require("diffview.actions") -- Load actions inside config
+      -- local lib = require("diffview.lib") -- load liv inside config
+      -- local view = lib.get_current_view()
+
+      local function toggle_diffviewhistorypanal()
+        local bufname = vim.api.nvim_buf_get_name(0)
+        if bufname:match("diffview:///panels/") then
+          actions.toggle_files() -- If inside the file panel, close it
+        else
+          actions.focus_files() -- If inside DiffviewFileHistory, open the file panel
+        end
+      end
+
+      -- local function safe_cycle_layout()
+      --   local bufname = vim.api.nvim_buf_get_name(0)
+      --   vim.bo[bufname].modifiable = true
+      --   -- Try cycling the layout
+      --   actions.cycle_layout()
+      --   -- Restore original modifiable state
+      --   vim.bo[bufname].modifiable = false
+      -- end
 
       require("diffview").setup({
         diff_binaries = false,    -- Show diffs for binariesdiff_binaries = false, 
@@ -70,8 +91,8 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
           view = { -- This is the main buffer, were we can see the files text
             -- The `view` bindings are active in the diff buffers, only when the current
             -- tabpage is a Diffview.
-            { "n", "<tab><tab>",     actions.select_next_entry,              { desc = "Open the diff for the next file" } },
-            { "n", "<s-tab><s-tab>", actions.select_prev_entry,              { desc = "Open the diff for the previous file" } },
+            { "n", "<tab><tab>",     actions.select_next_entry,           { desc = "Open the diff for the next file" } },
+            { "n", "<s-tab><s-tab>", actions.select_prev_entry,           { desc = "Open the diff for the previous file" } },
             { "n", "<c-w>s",      actions.goto_file_split,                { desc = "Open the file in a new split" } },
             { "n", "ss",         ':diffsplit<CR>',                        { desc = "Open the file in a new split" } },
             { "n", "<leader>gf",  actions.goto_file_tab,                  { desc = "Open the file in a new tabpage" } },
@@ -126,10 +147,10 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
             { "n", "L",              actions.open_commit_log,                { desc = "Open the commit log panel" } },
             { "n", "<c-b>",          actions.scroll_view(-0.25),             { desc = "Scroll the view up" } },
             { "n", "<c-f>",          actions.scroll_view(0.25),              { desc = "Scroll the view down" } },
-            { "n", "<tab><tab>",        actions.select_next_entry,              { desc = "Open the diff for the next file" } },
-            -- { "n", "<tab>",        actions.select_next_entry,              { desc = "Open the diff for the next file" } },
-            { "n", "<s-tab><s-tab>",    actions.select_prev_entry,              { desc = "Open the diff for the next file" } },
-            -- { "n", "<s-tab>",        actions.select_prev_entry,              { desc = "Open the diff for the previous file" } },
+            { "n", "<tab><tab>",        actions.select_next_entry,           { desc = "Open the diff for the next file" } },
+            -- { "n", "<tab>",        actions.select_next_entry,             { desc = "Open the diff for the next file" } },
+            { "n", "<s-tab><s-tab>",    actions.select_prev_entry,           { desc = "Open the diff for the next file" } },
+            -- { "n", "<s-tab>",        actions.select_prev_entry,           { desc = "Open the diff for the previous file" } },
             { "n", "i",              actions.listing_style,                  { desc = "Toggle between 'list' and 'tree' views" } },
             { "n", "R",              actions.refresh_files,                  { desc = "Update stats and entries in the file list" } },
             { "n", "<leader>e",      actions.toggle_files,                   { desc = "Toggle the file panel" } },
@@ -143,20 +164,19 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
             -- { "n", "<leader>cA",     actions.conflict_choose_all("all"),     { desc = "Choose all the versions of a conflict for the whole file" } },
             -- { "n", "dX",             actions.conflict_choose_all("none"),    { desc = "Delete the conflict region for the whole file" } },
           },
--- This is for getting like ref logs :todom: 
+          -- This is for getting like ref logs, its the File History Log panal 
           file_history_panel = {
             -- This one is inside list for reglog type data, not in buffer
             { "n", "g!",            actions.options,                     { desc = "Open the option panel" } },
             { "n", "<C-A-d>",       actions.open_in_diffview,            { desc = "Open the entry under the cursor in a diffview" } },
             { "n", "y",             actions.copy_hash,                   { desc = "Copy the commit hash of the entry under the cursor" } },
             { "n", "L",             actions.open_commit_log,             { desc = "Show commit details" } },
-            { "n", "X",             actions.restore_entry,               { desc = "Restore file to the state from the selected entry" } },
-            { "n", "zo",            actions.open_fold,                   { desc = "Expand fold" } },
-            { "n", "zc",            actions.close_fold,                  { desc = "Collapse fold" } },
-            { "n", "h",             actions.close_fold,                  { desc = "Collapse fold" } },
-            { "n", "za",            actions.toggle_fold,                 { desc = "Toggle fold" } },
-            { "n", "zR",            actions.open_all_folds,              { desc = "Expand all folds" } },
-            { "n", "zM",            actions.close_all_folds,             { desc = "Collapse all folds" } },
+            { "n", "XX",            actions.restore_entry,               { desc = "CAUTION: Restore file to the state from the selected entry(revert and removes untracked files)" } },
+            -- { "n", "zo",            actions.open_fold,                   { desc = "Expand fold" } },
+            -- { "n", "zc",            actions.close_fold,                  { desc = "Collapse fold" } },
+            -- { "n", "W",            actions.toggle_fold,                 { desc = "Toggle fold" } },
+            { "n", "O",             actions.open_all_folds,              { desc = "Expand all folds" } },
+            { "n", "W",             actions.close_all_folds,             { desc = "Collapse all folds" } },
             { "n", "j",             actions.next_entry,                  { desc = "Bring the cursor to the next file entry" } },
             { "n", "<down>",        actions.next_entry,                  { desc = "Bring the cursor to the next file entry" } },
             { "n", "k",             actions.prev_entry,                  { desc = "Bring the cursor to the previous file entry" } },
@@ -165,19 +185,22 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
             { "n", "o",             actions.select_entry,                { desc = "Open the diff for the selected entry" } },
             { "n", "l",             actions.select_entry,                { desc = "Open the diff for the selected entry" } },
             { "n", "<2-LeftMouse>", actions.select_entry,                { desc = "Open the diff for the selected entry" } },
-            { "n", "<c-b>",         actions.scroll_view(-0.25),          { desc = "Scroll the view up" } },
-            { "n", "<c-f>",         actions.scroll_view(0.25),           { desc = "Scroll the view down" } },
+            { "n", "<c-p>",         actions.scroll_view(-0.25),          { desc = "Scroll the view up" } },
+            { "n", "<c-n>",         actions.scroll_view(0.25),           { desc = "Scroll the view down" } },
             { "n", "<tab>",         actions.select_next_entry,           { desc = "Open the diff for the next file" } },
             { "n", "<s-tab>",       actions.select_prev_entry,           { desc = "Open the diff for the previous file" } },
-            { "n", "[F",            actions.select_first_entry,          { desc = "Open the diff for the first file" } },
-            { "n", "]F",            actions.select_last_entry,           { desc = "Open the diff for the last file" } },
-            { "n", "gf",            actions.goto_file_edit,              { desc = "Open the file in the previous tabpage" } },
-            { "n", "<C-w><C-f>",    actions.goto_file_split,             { desc = "Open the file in a new split" } },
-            { "n", "<C-w>gf",       actions.goto_file_tab,               { desc = "Open the file in a new tabpage" } },
-            { "n", "<leader>e",     actions.focus_files,                 { desc = "Bring focus to the file panel" } },
-            { "n", "<leader>b",     actions.toggle_files,                { desc = "Toggle the file panel" } },
-            { "n", "g<C-x>",        actions.cycle_layout,                { desc = "Cycle available layouts" } },
+            -- { "n", "[F",            actions.select_first_entry,          { desc = "Open the diff for the first file" } },
+            -- { "n", "]F",            actions.select_last_entry,           { desc = "Open the diff for the last file" } },
+            -- { "n", "gf",            actions.goto_file_edit,              { desc = "Open the file in the previous tabpage" } },
+            { "n", "gss",           actions.goto_file_split,             { desc = "Open the file in a new split" } },
+            { "n", "gf",            actions.goto_file_tab,               { desc = "Open the file in a new tabpage" } },
+            -- { "n", "<leader>e",     actions.focus_files,                 { desc = "Bring focus to the file panel" } },
+            -- { "n", "<leader>b",     actions.toggle_files,                { desc = "Toggle the file panel" } },
+            -- { "n", "gx",            safe_cycle_layout,                   { desc = "Cycle available layouts", noremap = true, silent = true } },
             { "n", "?",             actions.help("file_history_panel"),  { desc = "Open the help panel" } },
+            -- to check for toggle in historyfilepanal
+            { "n", "<leader>e", toggle_diffviewhistorypanal, { desc = "Toggle or Open File Panel in Diffview History", noremap = true, silent = true } },
+
           },
           option_panel = {
             { "n", "<tab>", actions.select_entry,          { desc = "Change the current option" } },
