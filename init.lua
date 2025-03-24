@@ -78,7 +78,13 @@ require('lazy').setup({
 
   require 'custom_main.which_key', -- which key block
   -- NOTE: Plugins can specify dependencies.
-  --
+
+  -- this just maximized and mimimized the current buffer you are on currently
+  require 'custom_main.maximizer_split_file',
+
+  -- This plugin is simple to open a tree to see all undos that you have made
+  require 'custom_main.undotree_file',
+
   -- The dependencies are proper plugin specifications as well - anything
   -- you do for a plugin at the top level, you can do for a dependency.
   --
