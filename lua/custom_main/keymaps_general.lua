@@ -3,7 +3,7 @@
 
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
-local Keys = {} -- this lis to load functions
+local Keys = {} -- this is to load functions
 
 --NOTE: in ghostty, ctrl+z will force quit all without saving if nvim is open
 -------------------------------------------------------------------

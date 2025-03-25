@@ -25,7 +25,7 @@ require 'custom_main.base'
 -- This is for General Keymaps (loads keymaps that in file and not in function)
 local keymap_file = require 'custom_main.keymaps_general'
 
--- Testing is this is working properly
+-- Testing and seems that this is working properly
 require 'custom_main.tj_floatterm'
 -- :TODOM: have to see online file perhaps. this looks like a good one. also have to have something
 -- that allows me to fold files
@@ -85,6 +85,10 @@ require('lazy').setup({
   -- This plugin is simple to open a tree to see all undos that you have made
   require 'custom_main.undotree_file',
 
+  -- This is to simple add plugin that can toggle scopes
+  require 'custom_main.togglescope_ufo_file',
+
+  -- { config = keymap_file.() }, -- Here config is a callback function
   -- The dependencies are proper plugin specifications as well - anything
   -- you do for a plugin at the top level, you can do for a dependency.
   --
