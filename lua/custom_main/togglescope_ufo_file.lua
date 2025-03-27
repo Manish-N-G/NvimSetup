@@ -6,7 +6,7 @@ return {
   {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
-    -- event = "BufRead", -- Load when a buffer is read (lazy loading)
+    event = "BufRead", -- Load when a buffer is read (lazy loading)
     config = function()
 
       -- Function to modify virtual text in folds
