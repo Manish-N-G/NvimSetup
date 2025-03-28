@@ -282,7 +282,7 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
         -- Set to false if you want to be responsible for creating _ALL_ keymappings
         use_default_keymaps = true,
         -- Change the default way of opening neogit
-        kind = "tab",
+        kind = "tab", -- floation as option too
         notification_icon = "󰊢",
         status = {
           show_head_commit_hash = true,
@@ -291,20 +291,20 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
           HEAD_folded = false,
           mode_padding = 3,
           mode_text = {
-            M = "modified",
-            N = "new file",
-            A = "added",
-            D = "deleted",
-            C = "copied",
-            U = "updated",
-            R = "renamed",
-            DD = "unmerged",
-            AU = "unmerged",
-            UD = "unmerged",
-            UA = "unmerged",
-            DU = "unmerged",
-            AA = "unmerged",
-            UU = "unmerged",
+            M = "Mod:",
+            N = "New:",
+            A = "Added:",
+            D = "Del:",
+            C = "Copi:",
+            U = "Updated:",
+            R = "Renamed:",
+            DD = "Unmerged",
+            AU = "Unmerged",
+            UD = "Unmerged",
+            UA = "Unmerged",
+            DU = "Unmerged",
+            AA = "Unmerged",
+            UU = "Unmerged",
             ["?"] = "",
           },
         },
@@ -360,7 +360,7 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
         signs = {
           -- { CLOSED, OPENED }
           hunk = { "", "" },
-          item = { ">", "v" },
+          item = { " ▸", " ▾" },
           section = { ">", "v" },
         },
 
@@ -428,6 +428,7 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
           },
         },
 
+        -- Power full and use with caution
         mappings = {
           commit_editor = {
             ["q"] = "Close",
