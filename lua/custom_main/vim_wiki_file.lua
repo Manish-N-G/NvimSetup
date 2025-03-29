@@ -61,7 +61,7 @@ local function create_floating_window(opts)
 end
 
 -- Toggle terminal: open or hide the floating window with VimwikiIndex
-local toggle_terminal = function()
+local toggle_window = function()
   if not vim.api.nvim_win_is_valid(state.floating.win) then
     -- Create new floating window and open VimwikiIndex
     state.floating = create_floating_window { buf = state.floating.buf }
@@ -82,7 +82,7 @@ return {
 
   -- Open Vimwiki Index in Floating Window
   vim.keymap.set('n', '<leader>ww', function()
-    toggle_terminal()
+    toggle_window()
   end, { desc = "Open Vimwiki Index in Floating Window" }),
 
   -- Select and Open a Vimwiki File
@@ -115,8 +115,8 @@ return {
     end)
   end, { desc = "Choose and open a Vimwiki file in Floating Window" }),
 
-  -- Close terminal with <Esc><Esc> in terminal mode for floating window only
-  vim.keymap.set("t", "<esc><esc>", [[<C-\><C-n>:q!<CR>]], { noremap = true, silent = true }),
-  vim.keymap.set("t", "<C-q>", [[<C-\><C-n>]], { noremap = true, silent = true }),
+  -- -- Close terminal with <Esc><Esc> in terminal mode for floating window only
+  -- vim.keymap.set("t", "<esc><esc>", [[<C-\><C-n>:q!<CR>]], { noremap = true, silent = true }),
+  -- vim.keymap.set("t", "<C-q>", [[<C-\><C-n>]], { noremap = true, silent = true }),
 }
 
