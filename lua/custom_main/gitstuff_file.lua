@@ -13,9 +13,7 @@
 --     }
 --   end,
 -- }
---
 -- NOTE: for more info, you can check out kickstart/plugin/gitsigs to see full config
-
 return { -- Adds git related signs to the gutter, as well as utilities for managing changes
   {
     'lewis6991/gitsigns.nvim',
@@ -41,6 +39,9 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
     vim.keymap.set("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true, desc = "[G]it [R]eset hunk" }),
     vim.keymap.set("n", "<leader>gi", ":Gitsigns prev_hunk<CR>", { noremap = true, silent = true, desc = "[G]it hunk previous" }),
     vim.keymap.set("n", "<leader>go", ":Gitsigns next_hunk<CR>", { noremap = true, silent = true, desc = "[G]it hunk next" }),
+    vim.keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", { noremap = true, silent = true, desc = "[G]it toggle [B]lame line" }),
+    -- vim.keymap.set("n", "<leader>gb", function() package.loaded.gitsigns.blame_line{full=true} end,
+    --                { noremap = true, silent = true, desc = "[G]it [B]lame line" }),
   },
 
   -- This is diffview, for visual effects for gitdiff
