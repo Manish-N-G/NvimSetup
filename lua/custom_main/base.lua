@@ -102,3 +102,12 @@ vim.api.nvim_create_autocmd('InsertLeave', {
   pattern = '*',
   command = 'set nopaste',
 })
+
+-- setting vim wiki to use markdown
+vim.g.vimwiki_list = {
+  {
+    path = '~/vimwiki/',  -- Path to your wiki directory
+    syntax = 'markdown',  -- Use markdown syntax
+    ext = '.md'           -- Use `.md` as the file extension
+  }
+}

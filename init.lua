@@ -56,7 +56,10 @@ require('lazy').setup({
   require 'custom_main.gitstuff_file', -- gitsigns block
 
   -- this create a vertical line so that we can stay without the limit of code text characters
-  require 'custom_main.virt_column',
+  require 'custom_main.virt_column', -- Added ventical line for text limin on page
+
+  -- This allows me to use note taking here.
+  require 'custom_main.vim_wiki_file', -- vim wiki, not taking
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
