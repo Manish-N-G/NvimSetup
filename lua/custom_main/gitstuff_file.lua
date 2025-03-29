@@ -124,15 +124,15 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
           },
           diff3 = {
             -- Mappings in 3-way diff layouts
-            { { "n", "x" }, "2do",  actions.diffget("ours"),            { desc = "Obtain the diff hunk from the OURS version of the file" } },
-            { { "n", "x" }, "3do",  actions.diffget("theirs"),          { desc = "Obtain the diff hunk from the THEIRS version of the file" } },
+            { { "n", "xx" }, "2do",  actions.diffget("ours"),            { desc = "Obtain the diff hunk from the OURS version of the file" } },
+            { { "n", "xx" }, "3do",  actions.diffget("theirs"),          { desc = "Obtain the diff hunk from the THEIRS version of the file" } },
             { "n",          "g?",   actions.help({ "view", "diff3" }),  { desc = "Open the help panel" } },
           },
           diff4 = {
             -- Mappings in 4-way diff layouts
-            { { "n", "x" }, "1do",  actions.diffget("base"),            { desc = "Obtain the diff hunk from the BASE version of the file" } },
-            { { "n", "x" }, "2do",  actions.diffget("ours"),            { desc = "Obtain the diff hunk from the OURS version of the file" } },
-            { { "n", "x" }, "3do",  actions.diffget("theirs"),          { desc = "Obtain the diff hunk from the THEIRS version of the file" } },
+            { { "n", "xx" }, "1do",  actions.diffget("base"),            { desc = "Obtain the diff hunk from the BASE version of the file" } },
+            { { "n", "xx" }, "2do",  actions.diffget("ours"),            { desc = "Obtain the diff hunk from the OURS version of the file" } },
+            { { "n", "xx" }, "3do",  actions.diffget("theirs"),          { desc = "Obtain the diff hunk from the THEIRS version of the file" } },
             { "n",          "g?",   actions.help({ "view", "diff4" }),  { desc = "Open the help panel" } },
           },
           file_panel = { -- This is for the explorer part
@@ -143,7 +143,7 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
             { "n", "<2-LeftMouse>",  actions.select_entry,                   { desc = "Open the diff for the selected entry" } },
             { "n", "-",              actions.toggle_stage_entry,             { desc = "Stage / unstage the selected entry" } },
             { "n", "ss",             actions.toggle_stage_entry,             { desc = "stage selected file/ unstage" } },
-            { "n", "SS",             actions.stage_all,                      { desc = "Stage all entries" } },
+            { "n", "<c-s>",          actions.stage_all,                      { desc = "Stage all entries" } },
             { "n", "UU",             actions.unstage_all,                    { desc = "Unstage all entries" } },
             { "n", "L",              actions.open_commit_log,                { desc = "Open the commit log panel" } },
             { "n", "<c-b>",          actions.scroll_view(-0.25),             { desc = "Scroll the view up" } },
@@ -280,7 +280,7 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
         },
 
         -- Set to false if you want to be responsible for creating _ALL_ keymappings
-        use_default_keymaps = true,
+        use_default_keymaps = false,
         -- Change the default way of opening neogit
         kind = "tab", -- floation as option too
         notification_icon = "󰊢",
@@ -428,7 +428,7 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
           },
         },
 
-        -- Power full and use with caution
+        -- Powerfull and use with caution
         mappings = {
           commit_editor = {
             ["q"] = "Close",
@@ -487,28 +487,28 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
           popup = {
             ["?"] = "HelpPopup",
             ["A"] = "CherryPickPopup",
-            ["d"] = "DiffPopup",
+            ["dd"] = "DiffPopup",
             ["M"] = "RemotePopup",
             ["P"] = "PushPopup",
-            ["X"] = "ResetPopup",
-            ["Z"] = "StashPopup",
-            ["i"] = "IgnorePopup",
-            ["t"] = "TagPopup",
-            ["b"] = "BranchPopup",
-            ["B"] = "BisectPopup",
-            ["w"] = "WorktreePopup",
-            ["c"] = "CommitPopup",
-            ["f"] = "FetchPopup",
-            ["l"] = "LogPopup",
-            ["m"] = "MergePopup",
-            ["p"] = "PullPopup",
-            ["r"] = "RebasePopup",
-            ["v"] = "RevertPopup",
+            ["XX"] = "ResetPopup",
+            ["ZZ"] = "StashPopup",
+            ["ii"] = "IgnorePopup",
+            ["tt"] = "TagPopup",
+            ["bb"] = "BranchPopup",
+            ["BB"] = "BisectPopup",
+            ["ww"] = "WorktreePopup",
+            ["cc"] = "CommitPopup",
+            ["ff"] = "FetchPopup",
+            ["L"] = "LogPopup",
+            ["mm"] = "MergePopup",
+            ["pp"] = "PullPopup",
+            ["rr"] = "RebasePopup",
+            ["vv"] = "RevertPopup",
           },
           status = {
             ["j"] = "MoveDown",
             ["k"] = "MoveUp",
-            ["o"] = "OpenTree",
+            ["O"] = "OpenTree",
             ["q"] = "Close",
             ["I"] = "InitRepo",
             ["1"] = "Depth1",
@@ -516,12 +516,12 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
             ["3"] = "Depth3",
             ["4"] = "Depth4",
             ["Q"] = "Command",
-            ["<tab>"] = "Toggle",
-            ["x"] = "Discard",
-            ["s"] = "Stage",
+            ["<tab><tab>"] = "Toggle",
+            ["xx"] = "Discard",
+            ["ss"] = "Stage",
             ["S"] = "StageUnstaged",
             ["<c-s>"] = "StageAll",
-            ["u"] = "Unstage",
+            ["uu"] = "Unstage",
             ["K"] = "Untrack",
             ["U"] = "UnstageStaged",
             ["y"] = "ShowRefs",
@@ -529,7 +529,8 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
             ["Y"] = "YankSelected",
             ["<c-r>"] = "RefreshBuffer",
             ["<cr>"] = "GoToFile",
-            ["<s-cr>"] = "PeekFile",
+            ["o"] = "GoToFile",
+            ["<c-f>"] = "PeekFile",
             ["<c-v>"] = "VSplitOpen",
             ["<c-x>"] = "SplitOpen",
             ["<c-t>"] = "TabOpen",
@@ -543,8 +544,11 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
             ["<c-p>"] = "PreviousSection",
           },
         },
-
       }
+    -- setting mapping for neogit
+    vim.keymap.set("n", "<leader>gn", ":Neogit<CR>", { noremap = true, silent = true, desc = "[G]it [N]eogit" })
+    vim.keymap.set("n", "<leader>gc", ":NeogitCommit<CR>", { noremap = true, silent = true, desc = "[G]it [C]ommit Neogit" })
+
     end,
   },
 }
