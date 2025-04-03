@@ -86,6 +86,9 @@ keymap.set('n', '<leader>dl', vim.diagnostic.goto_next, { desc = '[D]iagnostics 
 
 -- Load Lazy
 keymap.set('n', '<leader>ll', ':Lazy<CR>', { desc = '[D]iagnostics previous' })
+
+-- Open nvim config from anywhere in nvim
+keymap.set("n", "<leader>nc", ":tabnew | edit ~/.config/nvim/<CR>", { desc = "Edit Neovim Config" })
 --------------------------------------------------------
 -- INSERT MODE::
 -- Remap for Esc keys
