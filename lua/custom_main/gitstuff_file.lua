@@ -511,6 +511,7 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
             ["k"] = "MoveUp",
             ["O"] = "OpenTree",
             ["q"] = "Close",
+            ["<Esc>"] = "Close",
             ["I"] = "InitRepo",
             ["1"] = "Depth1",
             ["2"] = "Depth2",
