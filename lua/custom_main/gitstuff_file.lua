@@ -518,6 +518,7 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
             ["4"] = "Depth4",
             ["Q"] = "Command",
             ["<tab><tab>"] = "Toggle",
+            ["<CR>"] = "Toggle",
             ["xx"] = "Discard",
             ["ss"] = "Stage",
             ["S"] = "StageUnstaged",
