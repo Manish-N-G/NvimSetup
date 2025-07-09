@@ -101,6 +101,8 @@ keymap.set('i', '<S-A-j>', '<down>')
 keymap.set('i', '<S-A-k>', '<up>')
 keymap.set('i', '<S-A-l>', '<right>')
 
+-- Add control backspace to delete word under the cursor
+keymap.set("i", "<C-BS>", "<C-w>", { noremap = true })
 --------------------------------------------------------
 -- COMMAND MODE::
 -- Remap for source

@@ -1,3 +1,4 @@
+-- Note: general shortcut is leader ww for me
 -- lobal variables to track the floating window and buffer
 local state = {
   floating = {
