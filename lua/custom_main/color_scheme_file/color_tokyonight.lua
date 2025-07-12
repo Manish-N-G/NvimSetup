@@ -10,7 +10,7 @@ return  { -- You can easily change to a different colorscheme. { Change the name
         },
         -- this does only for main buffer. I need to have it for all
         -- transparent_background = true, -- Make Nvim backgroup transparent
-        -- transparent = true, -- Make Nvim backgroup transparent
+        transparent = true, -- Make Nvim backgroup transparent
       }
 
       -- Load the colorscheme here.

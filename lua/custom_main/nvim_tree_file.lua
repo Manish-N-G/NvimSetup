@@ -84,3 +84,30 @@ nvim_tree.setup({
   --   },
   -- },
 })
+
+-- Transparent nvim-tree highlights In the following
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    local highlights = {
+      "NvimTreeNormal",
+      "NvimTreeNormalNC",
+      "NvimTreeEndOfBuffer",
+      "NvimTreeWinSeparator",
+    }
+    for _, hl in ipairs(highlights) do
+      vim.api.nvim_set_hl(0, hl, { bg = "NONE" })
+    end
+  end,
+})
+
+-- Apply once immediately in case theme already loaded
+local highlights = {
+  "NvimTreeNormal",
+  "NvimTreeNormalNC",
+  "NvimTreeEndOfBuffer",
+  "NvimTreeWinSeparator",
+}
+for _, hl in ipairs(highlights) do
+  vim.api.nvim_set_hl(0, hl, { bg = "NONE" })
+end
