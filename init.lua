@@ -113,7 +113,7 @@ require('lazy').setup({
   require 'custom_main.color_scheme_file.all',              -- ColorScheme all for download
   require 'custom_main.color_scheme_file.color_tokyonight', -- Color Scheme that is setup
   require 'custom_main.colorizer_file',                     -- Add color in hash for and rgb and other formats
-  -- { 'tribela/vim-transparent' }, -- Transparency
+  { 'tribela/vim-transparent' }, -- Transparency
 
   -- Highlight todo, notes, etc in comments
   require 'custom_main.todo_comment', -- todocomment block
