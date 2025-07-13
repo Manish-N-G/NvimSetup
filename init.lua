@@ -27,7 +27,7 @@ local keymap_file = require 'custom_main.keymaps_general'
 
 -- Testing and seems that this is working properly
 require 'custom_main.tj_floatterm'
--- :TODOM: have to see online file perhaps. this looks like a good one. also have to have something
+-- TODOM: have to see online file perhaps. this looks like a good one. also have to have something
 -- that allows me to fold files
 
 -- [[ Basic Autocommands ]]
@@ -113,7 +113,8 @@ require('lazy').setup({
   require 'custom_main.color_scheme_file.all',              -- ColorScheme all for download
   require 'custom_main.color_scheme_file.color_tokyonight', -- Color Scheme that is setup
   require 'custom_main.colorizer_file',                     -- Add color in hash for and rgb and other formats
-  { 'tribela/vim-transparent' }, -- Transparency
+  'HiPhish/rainbow-delimiters.nvim',                        -- Add different colors for delimiters
+  -- { 'tribela/vim-transparent' }, -- Transparency
 
   -- Highlight todo, notes, etc in comments
   require 'custom_main.todo_comment', -- todocomment block
@@ -146,6 +147,10 @@ require('lazy').setup({
 
   -- This is a debugger that can dubug code depending on what debugger adapters you have installed
   require 'custom_main.debugging_file', -- Debug code
+
+  --NOTE: need to fix eventually
+  --For Ghostty, we can add syntax highlighting
+  -- require 'custom_main.ghostty_file',
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and

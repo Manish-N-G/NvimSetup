@@ -147,11 +147,15 @@ return {
           args = { '--preserve-line-break' },
           -- stop_after_first_option = true, -- Use this to stop after the first formatter (needs to be added to all)
         },
+        -- rust = { "rustfmt" }, -- dont think this is still depreciated
+        yaml = { "prettierd" },
         -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
+        python = { "isort", "black" },
+        json = { "prettierd" },
+        jsonc = { "prettierd" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { "prettierd", "prettier", stop_after_first = true },
       },
     },
   },

@@ -44,6 +44,9 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
     --                { noremap = true, silent = true, desc = "[G]it [B]lame line" }),
   },
 
+  --TODO: I can use also gitblame that could be better for seeing blame stuff
+  --for this perhape "APZelos/blamer.nvim"
+
   -- This is diffview, for visual effects for gitdiff
   {
     "sindrets/diffview.nvim",
