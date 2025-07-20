@@ -8,7 +8,7 @@ return { -- Highlight, edit, and navigate code
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
       ensure_installed = { 'python', 'json', 'rust', 'go', 'pascal', 'bash', 'c', 'diff', 'html', 'lua', 'luadoc',
-        'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+        'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'javascript' },
       -- Install parsers synchronously ( only applied ti 'ensure_installed'.
       sync_install = false,
       -- Autoinstall languages that are not installed
@@ -21,6 +21,7 @@ return { -- Highlight, edit, and navigate code
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
         additional_vim_regex_highlighting = { 'ruby' },
+        -- Thinking I could just do {'ruby', false }
       },
       indent = { enable = true, disable = { 'ruby' } },
       -- autotag = {

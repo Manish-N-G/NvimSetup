@@ -80,39 +80,46 @@ return {
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
-          map('gld', require('telescope.builtin').lsp_definitions, '[Lsp] [G]oto [D]efinition')
+          map('gld', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
           -- Find references for the word under your cursor.
-          map('glr', require('telescope.builtin').lsp_references, '[Lsp] [G]oto [R]eferences')
+          map('glr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
-          map('glI', require('telescope.builtin').lsp_implementations, '[Lsp] [G]oto [I]mplementation')
+          map('glI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map('glD', require('telescope.builtin').lsp_type_definitions, '[Lsp] [G]oto Type [D]efinition')
+          map('glD', require('telescope.builtin').lsp_type_definitions, '[G]oto Type [D]efinition')
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
-          map('gds', require('telescope.builtin').lsp_document_symbols, '[Lsp] [G]oto [D]ocument [S]ymbols')
+          map('gLd', require('telescope.builtin').lsp_document_symbols, '[G]oto [D]ocument Symbols')
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
-          map('gws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[Lsp] [G]oto [W]orkspace [S]ymbols')
+          map('glw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[G]oto [W]orkspace Symbols')
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          map('grn', vim.lsp.buf.rename, '[Lsp] [G]oto [R]e[n]ame')
+          map('gln', vim.lsp.buf.rename, '[G]oto Re[n]ame')
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('gca', vim.lsp.buf.code_action, '[Lsp] [G]oto [C]ode [A]ction', { 'n', 'x' })
+          map('gla', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
-          map('gD', vim.lsp.buf.declaration, '[Lsp] [G]oto [D]eclaration')
+          map('gLD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+          -- for type under cursor, if the language server you are using supports them
+          -- the following code creates a keymap to show function definition and signature
+          -- NOTE: need to find mapping to scroll when popup is open
+          -- We can use also Shift K to do the same thing. You can press Shift K again to get into 
+          -- popup to scroll and navigate inside popup
+          map('gls', vim.lsp.buf.hover, '[G]oto fn hover [S]ignature')
 
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
@@ -163,7 +170,7 @@ return {
           if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
             map('gth', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-            end, '[Lsp] [G]oto [T]oggle Inlay [H]ints')
+            end, '[G]oto [T]oggle Inlay [H]ints')
           end
         end,
       })

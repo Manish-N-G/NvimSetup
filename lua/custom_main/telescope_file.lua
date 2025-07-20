@@ -63,12 +63,16 @@ return { -- Fuzzy Finder (files, lsp, etc)
               ['<C-k>'] = actions.move_selection_previous,
               ['<C-s>'] = actions.select_horizontal,
               ['<C-o>'] = actions.select_tab,
+              ['<C-d>'] = actions.preview_scrolling_down,
+              ['<C-u>'] = actions.preview_scrolling_up,
             },
             n = {
               ['gj'] = actions.close, -- close
               ['<C-j>'] = actions.move_selection_next,
               ['<C-k>'] = actions.move_selection_previous,
               ['<C-o>'] = actions.select_tab,
+              ['<C-d>'] = actions.preview_scrolling_down,
+              ['<C-u>'] = actions.preview_scrolling_up,
             },
           },
         },

@@ -18,6 +18,13 @@
   If you experience any errors while trying to install kickstart, run `:checkhealth` for more info.
 --]]
 
+--TODOM: To see if a table is available, we cauld do something like
+--: lua print(vim.api.nvim_get_keymap) or :lua print(vim)
+--And to see the values in tables, we could use telescope or do something like
+--:lua print(vim.inspect(vim.api))
+--or Insted I use a global call using the following
+require'custom_main.global_file'
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 -- NOTE: From here Manish, has added this changes
@@ -55,11 +62,14 @@ require('lazy').setup({
 
   require 'custom_main.gitstuff_file', -- gitsigns block
 
-  -- this create a vertical line so that we can stay without the limit of code text characters
-  require 'custom_main.virt_column', -- Added ventical line for text limin on page
+  -- this create a vertical line so that we can stay within the limits of the boundry
+  require 'custom_main.virt_column', -- Added ventical line for text limit on page
 
   -- This allows me to use note taking here.
   require 'custom_main.vim_wiki_file', -- vim wiki, not taking
+
+  -- the flash plugin can use used to replace the / and ?, but I prefer it not to 
+  require 'custom_main.flash_file', -- this allows for quick navigation in buffer
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --

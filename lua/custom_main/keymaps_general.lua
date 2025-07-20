@@ -90,6 +90,11 @@ keymap.set('n', '<leader>ll', ':Lazy<CR>', { desc = '[D]iagnostics previous' })
 -- Open nvim config from anywhere in nvim
 -- keymap.set("n", "<leader>nc", ":tabnew | edit ~/.config/nvim/<CR>", { desc = "Edit Neovim Config" })
 keymap.set("n", "<leader>nc", ":tabnew | lcd ~/.config/nvim/<CR>", { desc = "Edit Neovim Config" })
+
+-- Special to reload lua files. Note: you can to :lua = vim.api or :lua = vim.keymap.set to see the
+-- the whole list of table fields. This way we can superchange the dev
+-- to search inside help, we can hover over a word and type Shift k.
+keymap.set("n", "<leader>x", ":.lua<CR>")
 --------------------------------------------------------
 -- INSERT MODE::
 -- Remap for Esc keys
@@ -135,6 +140,10 @@ keymap.set('v', 'K', ":m '<-2<CR>gv=gv", opts)
 -- Keep register from changing when printed from yanked
 keymap.set('v', 'p', '"_dP', opts)
 
+-- the whole list of table fields. Not only is it for a single line, but we can use it for a
+-- selected list of values
+-- This will allow us to execte the specific lines of code we have visually selected only.
+keymap.set("v", "<leader>x", ":.lua<CR>")
 --------------------------------------------------------
 -- Visual Block Mode:
 -- mode block up and down
