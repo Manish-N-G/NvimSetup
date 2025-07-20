@@ -141,6 +141,9 @@ require('lazy').setup({
   -- This plugin allows us to see images in the buffer
   require 'custom_main.3rd_image',
 
+  -- This file is for rust language that includes rust crates
+  require 'custom_main.rust_files',
+
   -- NvimTree setup
   { -- Nvim tree taking from file
     "nvim-tree/nvim-tree.lua",
